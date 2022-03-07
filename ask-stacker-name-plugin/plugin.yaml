@@ -1,0 +1,27 @@
+name: ask-stacker-name
+description: Plugin to add capacity to hello stacker app to ask stacker name before say hello
+types:
+  - app
+hooks:
+  - type: edit
+    trigger: after-render
+    path: main.go
+    changes:
+      - search:
+          string: "func main() {"
+          insert-after:
+            snippet: snippets/ask_name_snippet
+          when:
+            not-exists: fmt.Println("What is your name, stacker? ")
+      - search:
+          string: "Stacker!"
+          replace-by:
+            value: "%s!" 
+          when:
+            not-exists: "%s!"
+      - search:
+          pattern: fmt.Printf\("%s %s!\\n", (.*)\)
+          replace-by:
+            value: fmt.Printf("%s %s!\\n", \1, name)
+          when:
+            not-exists: ", name)"

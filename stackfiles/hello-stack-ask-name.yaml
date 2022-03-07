@@ -1,0 +1,5 @@
+type: app
+description: Golang example application created with getting-started-golang stack
+template: getting-started-golang/hello-stacker-app
+plugins:
+  - plugin: getting-started-golang/ask-stacker-name

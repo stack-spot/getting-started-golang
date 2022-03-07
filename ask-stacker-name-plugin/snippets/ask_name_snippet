@@ -1,0 +1,3 @@
+	var name string
+	fmt.Println("What is your name, stacker? ")
+	fmt.Scanln(&name)
